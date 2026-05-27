@@ -49,6 +49,8 @@ project.assets.json
 
 # Publish output
 publish/
+build/
+dist/
 
 # Test results
 [Tt]est[Rr]esult*/

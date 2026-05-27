@@ -4,97 +4,103 @@
 [![Avalonia](https://img.shields.io/badge/Avalonia-11.3.9-8B44AC)](https://avaloniaui.net/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-基于 [Avalonia UI](https://avaloniaui.net/) 的跨平台 MMKV 数据文件解析工具，灵感来源于 [pengwei1024/MMKVReader](https://github.com/pengwei1024/MMKVReader)。
+A cross-platform MMKV data file parser built with [Avalonia UI](https://avaloniaui.net/), inspired by [pengwei1024/MMKVReader](https://github.com/pengwei1024/MMKVReader).
 
-## 功能特性
+> 中文说明请查看：[README.zh-CN.md](README.zh-CN.md)
 
-- 🖥️ **跨平台支持** - Windows、macOS、Linux
-- 📁 **拖放支持** - 直接拖放 MMKV 数据文件和 CRC 文件
-- 🔍 **多类型解析** - 支持 Auto/String/Int32/Int64/Float/Double/Bool/Bytes
-- 🌙 **深色主题** - 现代化的深色界面设计
-- 📊 **数据表格** - 清晰展示解析后的键值对数据
+## Features
 
-## 截图
+- 🖥️ **Cross-platform support** - Windows, macOS, and Linux
+- 📁 **Drag and drop** - Open MMKV data files and CRC files directly
+- 🔍 **Multiple value types** - Auto/String/Int32/Int64/Float/Double/Bool/Bytes
+- 🌙 **Dark theme** - Modern desktop UI with fluent styling
+- 📊 **Structured table view** - Inspect parsed key-value data clearly
+
+## Screenshots
+
 |  |  |  |
 |:---:|:---:|:---:|
 | ![](screenshots/main.png) | ![](screenshots/main2.png) | ![](screenshots/main3.png) |
 
-## 使用方法
+## Usage
 
-### 方式一：拖放文件
+### Option 1: Drag and drop files
 
-将 MMKV 数据文件（和可选的 .crc 文件）直接拖放到应用窗口。
+Drag an MMKV data file, with an optional `.crc` file, directly into the application window.
 
-### 方式二：选择文件
+### Option 2: Select a file manually
 
-点击「选择数据文件」按钮选择 MMKV 文件。
+Click **Select Data File** and choose the MMKV file you want to inspect.
 
-### 数据类型
+### Supported data types
 
-使用右上角的下拉框选择数据解析类型：
+Use the selector in the top-right corner to choose how values should be parsed:
 
-- **Auto** - 自动检测类型（默认）
-- **String** - 字符串
-- **Int32/Int64** - 整数
-- **Float/Double** - 浮点数
-- **Bool** - 布尔值
-- **Bytes** - 十六进制字节
+- **Auto** - Detect type automatically (default)
+- **String** - String values
+- **Int32 / Int64** - Integer values
+- **Float / Double** - Floating-point values
+- **Bool** - Boolean values
+- **Bytes** - Hexadecimal byte output
 
-## 构建运行
+## Build and run
 
-### 环境要求
+### Requirements
 
 - [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
 
-### 运行
+### Run locally
 
 ```bash
-# 克隆仓库
-git clone https://github.com/960208781/AvaloniaMMKVReader.git
+# Clone the repository
+git clone https://github.com/song-chaoyang/AvaloniaMMKVReader.git
 cd AvaloniaMMKVReader
 
-# 运行桌面版
+# Run the desktop app
 dotnet run --project AvaloniaMMKVReader.Desktop
 ```
 
-### 发布
+### Publish
 
 ```bash
 # Windows
 dotnet publish AvaloniaMMKVReader.Desktop -c Release -r win-x64 --self-contained
 
-# macOS
+# macOS Intel
 dotnet publish AvaloniaMMKVReader.Desktop -c Release -r osx-x64 --self-contained
+
+# macOS Apple Silicon
+dotnet publish AvaloniaMMKVReader.Desktop -c Release -r osx-arm64 --self-contained
 
 # Linux
 dotnet publish AvaloniaMMKVReader.Desktop -c Release -r linux-x64 --self-contained
 ```
 
-## 项目结构
+## Project structure
 
-```
+```text
 AvaloniaMMKVReader/
-├── AvaloniaMMKVReader/           # 核心库
-│   ├── Models/                   # 数据模型
-│   ├── Services/                 # MMKV 解析服务
-│   ├── ViewModels/               # MVVM 视图模型
-│   └── Views/                    # UI 视图
-├── AvaloniaMMKVReader.Desktop/   # 桌面应用入口
-├── AvaloniaMMKVReader.Android/   # Android 平台（需要 workload）
-├── AvaloniaMMKVReader.iOS/       # iOS 平台（需要 workload）
-└── AvaloniaMMKVReader.Browser/   # Web 平台
+├── AvaloniaMMKVReader/           # Core library
+│   ├── Models/                   # Data models
+│   ├── Services/                 # MMKV parsing services
+│   ├── ViewModels/               # MVVM view models
+│   └── Views/                    # UI views
+├── AvaloniaMMKVReader.Desktop/   # Desktop entry project
+├── AvaloniaMMKVReader.Android/   # Android project (requires workload)
+├── AvaloniaMMKVReader.iOS/       # iOS project (requires workload)
+└── AvaloniaMMKVReader.Browser/   # Web project
 ```
 
-## 关于 MMKV
+## About MMKV
 
-[MMKV](https://github.com/Tencent/MMKV) 是腾讯开源的高性能 key-value 存储框架，广泛用于移动端应用。本工具可以解析 MMKV 生成的数据文件，方便开发调试。
+[MMKV](https://github.com/Tencent/MMKV) is Tencent's high-performance key-value storage framework and is widely used in mobile applications. This tool helps developers inspect MMKV-generated data files during debugging and analysis.
 
-## 许可证
+## License
 
 MIT License
 
-## 致谢
+## Acknowledgements
 
-- [Avalonia UI](https://avaloniaui.net/) - 跨平台 UI 框架
-- [pengwei1024/MMKVReader](https://github.com/pengwei1024/MMKVReader) - 原始 macOS 版本
-- [Tencent/MMKV](https://github.com/Tencent/MMKV) - MMKV 存储框架
+- [Avalonia UI](https://avaloniaui.net/) - Cross-platform UI framework
+- [pengwei1024/MMKVReader](https://github.com/pengwei1024/MMKVReader) - Original macOS version
+- [Tencent/MMKV](https://github.com/Tencent/MMKV) - MMKV storage framework
