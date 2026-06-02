@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using AvaloniaMMKVReader.Models;
 
@@ -64,7 +65,7 @@ public class MMKVParser
             }
         }
 
-        return items;
+        return DeduplicateByKey(items);
     }
 
     /// <summary>
@@ -100,7 +101,19 @@ public class MMKVParser
             }
         }
 
-        return items;
+        return DeduplicateByKey(items);
+    }
+
+    private static List<MMKVItem> DeduplicateByKey(List<MMKVItem> items)
+    {
+        if (items.Count <= 1)
+            return items;
+
+        return items
+            .GroupBy(item => item.Key)
+            .Select(group => group.Last())
+            .OrderBy(item => item.Index)
+            .ToList();
     }
 
     private MMKVItem? ReadKeyValue(int index, MMKVDataType preferredType)
@@ -397,4 +410,3 @@ public class MMKVParser
         return false;
     }
 }
-
