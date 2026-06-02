@@ -109,12 +109,13 @@ public class MMKVParser
             return items;
 
         var seenKeys = new HashSet<string>();
-        var deduplicated = new List<MMKVItem>();
+        var deduplicated = new List<MMKVItem>(items.Count);
 
         for (int i = items.Count - 1; i >= 0; i--)
         {
             var item = items[i];
-            if (seenKeys.Add(item.Key))
+            var key = item.Key ?? string.Empty;
+            if (seenKeys.Add(key))
             {
                 deduplicated.Add(item);
             }
