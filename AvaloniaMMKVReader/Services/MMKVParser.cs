@@ -109,7 +109,7 @@ public class MMKVParser
             return items;
 
         var seenKeys = new HashSet<string>();
-        var deduplicated = new List<MMKVItem>(items.Count);
+        var deduplicated = new List<MMKVItem>();
 
         for (int i = items.Count - 1; i >= 0; i--)
         {
