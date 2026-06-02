@@ -64,7 +64,7 @@ public class MMKVParser
             }
         }
 
-        return items;
+        return DeduplicateByKey(items);
     }
 
     /// <summary>
@@ -100,7 +100,29 @@ public class MMKVParser
             }
         }
 
-        return items;
+        return DeduplicateByKey(items);
+    }
+
+    private static List<MMKVItem> DeduplicateByKey(List<MMKVItem> items)
+    {
+        if (items.Count <= 1)
+            return items;
+
+        var seenKeys = new HashSet<string>();
+        var deduplicated = new List<MMKVItem>(items.Count);
+
+        for (int i = items.Count - 1; i >= 0; i--)
+        {
+            var item = items[i];
+            var key = item.Key ?? string.Empty;
+            if (seenKeys.Add(key))
+            {
+                deduplicated.Add(item);
+            }
+        }
+
+        deduplicated.Reverse();
+        return deduplicated;
     }
 
     private MMKVItem? ReadKeyValue(int index, MMKVDataType preferredType)
@@ -397,4 +419,3 @@ public class MMKVParser
         return false;
     }
 }
-
